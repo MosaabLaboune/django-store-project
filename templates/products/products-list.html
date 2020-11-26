@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+</head>
+<body>
+
+    <header>
+        <h1><a href="{% url 'products_list' %}">STORE</a></h1>
+    </header>
+
+    <ul>
+        {% for product in products %}
+          <li>
+            <img src="{{product.image.url}}" />
+            <div>{{product.brand}}</div>
+            <a href="{{ product.get_absolute_url }}">
+              <h2>{{product.title}}</h2>
+            </a>
+            <div>{{product.price}}</div>
+          </li>
+        {% empty %}
+        <p>No products yet.</p>
+        {% endfor %}
+        </ul>
+</body>
+</html>
