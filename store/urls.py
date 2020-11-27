@@ -15,12 +15,17 @@ Including another URLconf
 """
 
 from django.contrib import admin
+from django.shortcuts import redirect
 from django.urls import path
 from django.urls.conf import include
 import products.urls 
 
+def home(request):
+    return redirect('products_list')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('products.urls'))
+    path('', home, name='home'),
+    path('', include('products.urls')),
 
 ]

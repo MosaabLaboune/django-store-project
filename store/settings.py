@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'products'
+    'products',
 ]
 
 MIDDLEWARE = [
@@ -125,4 +125,4 @@ STATIC_URL = '/static/'
 
 
 
-ALLOWED_HOSTS = ['.herokuapp.com','http://127.0.0.1:8000/']
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
