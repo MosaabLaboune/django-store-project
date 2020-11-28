@@ -26,7 +26,7 @@ SECRET_KEY = 'fm!$5l1)hs8^dgk1ynk@r_ma!jh&jrp!1&wcq7mx+y+!7q2ue='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
 
 # Application definition
@@ -131,4 +131,6 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/' 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
