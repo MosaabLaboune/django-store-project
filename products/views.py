@@ -1,7 +1,8 @@
 from products.forms import AddProductForm
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Product
 from .forms import AddProductForm
+
 # Create your views here.
 def products_list(request):
     products = Product.objects.all()
@@ -12,28 +13,44 @@ def product_details(request, pk):
     return render(request, 'products/product-details.html', {'product': product})
 
 def product_add(request):
-    if request.method == 'POST':
-        form = AddProductForm(request.POST)
+    if request.user.is_authenticated and request.user.is_superuser: 
+        if request.method == 'POST':
+            form = AddProductForm(request.POST, request.Files)
 
-        if form.is_valid():
-            form.save()
-            return render(request, 'products/product-add-successful.html')
+            if form.is_valid():
+                form.save()
+                return render(request, 'products/product-add-successful.html')
+        else:
+            form = AddProductForm()
+
+        return render(request, 'products/product-add.html', {'form': form})
+
     else:
-        form = AddProductForm()
-
-    return render(request, 'products/product-add.html', {'form': form})
+        return redirect('product_list')
 
 
 def product_edit(request, pk):
-    product = get_object_or_404(Product, pk=pk)
+    if request.user.is_authenticated and request.user.is_superuser: 
+        product = get_object_or_404(Product, pk=pk)
 
-    if request.method == 'POST':
-        form = AddProductForm(request.POST, instance=product)
+        if request.method == 'POST':
+            form = AddProductForm(request.POST, request.Files, instance=product)
 
-        if form.is_valid():
-            form.save()
-            return render(request, 'products/product-add-successful.html')
+            if form.is_valid():
+                form.save()
+                return render(request, 'products/product-add-successful.html')
+        else:
+            form = AddProductForm(instance=product)
+
+        return render(request, 'products/product-add.html', {'form': form})
+    
     else:
-        form = AddProductForm(instance=product)
-        
-    return render(request, 'products/product-add.html', {'form': form})
+        return redirect('product_list')    
+
+
+def product_delete(request, pk):
+    if request.user.is_authenticated and request.user.is_superuser:
+        product = get_object_or_404(Product, pk=pk).delete()
+        return render(request, "products/product-deleted.html", {'product': product})
+    else:
+        return redirect('product_list')
