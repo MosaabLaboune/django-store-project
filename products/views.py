@@ -15,7 +15,7 @@ def product_details(request, pk):
 def product_add(request):
     if request.user.is_authenticated and request.user.is_superuser: 
         if request.method == 'POST':
-            form = AddProductForm(request.POST, request.Files)
+            form = AddProductForm(request.POST, request.FILES)
 
             if form.is_valid():
                 form.save()

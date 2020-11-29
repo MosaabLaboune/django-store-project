@@ -18,11 +18,13 @@ def signup(request):
             user.save()
 
             send_confirmation_email(request, user)
-            
-            redirect(request, 'registration/signup_success.html')
+
+            return render(request, 'registration/signup_success.html')
     else:
         form = SignUpForm()
+
     return render(request, 'registration/signup.html', {'form': form})
+
 
 def activate_email(request, uid, token):
     user = get_object_or_404(User, pk=uid)
