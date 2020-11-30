@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block head_title %}Success{% endblock %}
+
+{% block content %}
+
+<ul>
+
+    {% for product in products %}
+    <li>
+        <h2>{{ product.title | capfirst }}</h2>
+        <a href="{% url 'remove_from_cart' product_id=product.id %}">remove</a>
+        <p>${{ product.price }}</p>
+    </li>
+
+
+
+    {% empty %}
+    <li>No products yet.</li>
+
+    {% endfor %}
+
+</ul>
+
+<a href="{% url 'clear_cart' %}">clear</a>
+
+<p>total price: ${{ total_price }}</p>
+<a href="#">buy now</a>
+{% endblock %}
