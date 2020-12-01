@@ -24,5 +24,5 @@
 <a href="{% url 'clear_cart' %}">clear</a>
 
 <p>total price: ${{ total_price }}</p>
-<a href="#">buy now</a>
+<a href="{% url 'order' %}">buy now</a>
 {% endblock %}
