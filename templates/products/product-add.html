@@ -2,19 +2,21 @@
 {% block head_title %}Add/Edit Product{% endblock %}
 
 {% block content %}
-<section class="form-section">
-    <h2 class="section-headline">Add/Edit Product</h2>
-    <p class="section-description">
-        Please fill in your email to reset your password.
-    </p>
-    <div class="form">
-        <form action="" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <p>
-                <button type="submit">Save</button>
-            </p>
-        </form>
+<div class="cart-box-main">
+    <div class="container">
+        <div class="row new-account-login">
+            <div class="col-sm-6 col-lg-6 mb-3">
+                <div class="title-left">
+                    <h2 class="section-headline">Add/Edit Product</h2>
+                </div>
+                    <form class="mt-3  review-form-box" action="" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+
+                        <button type="submit" class="btn hvr-hover">Save</button>
+                    </form>
+            </div>
+        </div>
     </div>
-</section>
+</div>
 {% endblock %}

@@ -2,19 +2,21 @@
 {% block head_title %}Order{% endblock %}
 
 {% block content %}
-<section class="form-section">
-    <h2 class="section-headline">Order</h2>
-    <p class="section-description">
-        Please fill in your address.
-    </p>
-    <div class="form">
-        <form action="" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <p>
-                <button type="submit">Order</button>
-            </p>
-        </form>
+<div class="cart-box-main">
+    <div class="container">
+        <div class="row new-account-login">
+            <div class="col-sm-6 col-lg-6 mb-3">
+                <div class="title-left">
+                <h2 class="section-headline">Order</h2>
+                </div>
+                <form mt-3  review-form-box action="" method="post" ">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    <button class="btn hvr-hover" type="submit">Order</button>
+                </form>
+            </div>
+        </div>
     </div>
-</section>
+</div>
 {% endblock %}

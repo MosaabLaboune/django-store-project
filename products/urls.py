@@ -2,7 +2,7 @@ from django.urls import path
 from .views import product_list, product_details, add_product, edit_product, delete_product
 
     
-urlspattrens = [
+urlpatterns = [
     path('products/', product_list, name='product_list'),
     path('products/<int:pk>/', product_details, name='product_details'),
     path('products/add/', add_product, name='add_product'),

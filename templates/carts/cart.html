@@ -3,26 +3,76 @@
 
 {% block content %}
 
-<ul>
 
-    {% for product in products %}
-    <li>
-        <h2>{{ product.title | capfirst }}</h2>
-        <a href="{% url 'remove_from_cart' product_id=product.id %}">remove</a>
-        <p>${{ product.price }}</p>
-    </li>
+    <!-- Start Cart  -->
+    <div class="cart-box-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="table-main table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Images</th>
+                                    <th>Product Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th>Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for product in products %}
+                                <tr>
+                                    <td class="thumbnail-img">
+                                        <a href="{{product.get_absolute_url}}"><img class="img-fluid" src="{{product.image.url}}" alt="" /></a>
+                                    </td>
+                                    <td class="name-pr">
+                                        <a href="{{product.get_absolute_url}}">{{ product.title | capfirst }}</a>
+                                    </td>
+                                    <td class="price-pr">
+                                        <p>${{ product.price }}</p>
+                                    </td>
+                                    <td class="quantity-box"><input type="number" size="4" value="1" min="0" step="1" class="c-input-text qty text"></td>
+                                    <td class="total-pr">
+                                        <p>${{ product.price }}</p>
+                                    </td>
+                                    <td class="remove-pr">
+                                        <a href="{% url 'remove_from_cart' product_id=product.id %}"><i class="fas fa-times"></i></a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>No products yet.</tr>
+                            
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-5">
+                <div class="col-lg-6 col-sm-6">
+                    <div class="update-box">
+                        <a href="{% url 'clear_cart' %}">clear</a>
+                    </div>
+                </div>
+            </div>
 
+            <div class="row my-5">
+                <div class="col-lg-8 col-sm-12"></div>
+                <div class="col-lg-4 col-sm-12">
+                    <div class="order-box">
+                        <div class="d-flex gr-total">
+                            <h5>Grand Total</h5>
+                            <div class="ml-auto h5">${{ total_price }}</div>
+                        </div>
+                        <hr> </div>
+                </div>
+                <div class="col-12 d-flex shopping-box"><a href="{% url 'order' %}" class="ml-auto btn hvr-hover">buy now</a> </div>
+            </div>
 
+        </div>
+    </div>
+    <!-- End Cart -->
 
-    {% empty %}
-    <li>No products yet.</li>
-
-    {% endfor %}
-
-</ul>
-
-<a href="{% url 'clear_cart' %}">clear</a>
-
-<p>total price: ${{ total_price }}</p>
-<a href="{% url 'order' %}">buy now</a>
 {% endblock %}
