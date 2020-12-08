@@ -6,7 +6,6 @@ from .forms import OrderForm
 from .utils import send_order_email
 
 
-
 @login_required
 def order(request):
     user = request.user
