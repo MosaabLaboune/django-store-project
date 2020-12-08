@@ -10,8 +10,12 @@
                     <h2 class="section-headline">Login</h2>
                 </div>
                 <form class="mt-3  review-form-box" action="" method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        </div>
+                    </div>
 
                     <button class="btn hvr-hover" id="submit" type="submit">Sign In</button>
                     <a  href="{% url 'signup' %}" >don't have account?</a>
